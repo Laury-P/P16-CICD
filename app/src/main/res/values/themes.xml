@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Theme.Eventorias" parent="android:Theme.Material.Light.NoActionBar" />
+
+    <style name="Theme.Eventorias.Splash" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/black</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/logo_sun_eventorias</item>
+        <item name="postSplashScreenTheme">@style/Theme.Eventorias</item>
+    </style>
+</resources>

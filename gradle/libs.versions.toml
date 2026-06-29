@@ -1,0 +1,124 @@
+[versions]
+# Base Android
+agp = "9.0.0"
+kotlin = "2.3.0"
+ksp = "2.3.4"
+androidxCore = "1.15.0"
+androidxLifecycle = "2.10.0"
+androidxActivity = "1.9.3" #Compose acitivity
+androidxCoreSplashscreen = "1.0.1"
+composeDestination = "2.3.0" #Compose Destination de Raamcosta
+kotlinxCoroutines = "1.10.1"
+accompanistPermissions = "0.37.0"
+secretsGradlePlugin = "2.0.1"
+
+# UI Compose
+androidxComposeBom = "2026.02.00"
+uiTextGoogleFonts = "1.11.2"
+
+# Hilt
+hilt = "2.59"
+hiltNavCompose = "1.2.0"
+
+#BDD
+firebaseBom = "33.7.0"
+firebaseUi = "10.0.0-beta02"
+gmsPlugin = "4.4.4"
+datastore = "1.1.1"
+
+# Images
+coil = "2.7.0"
+
+# Tests unitaire
+junitJupiter = "5.10.2"
+
+#Tests d'integration
+junit4 = "4.13.2"
+androidxJunit = "1.2.1"
+androidxEspresso = "3.6.1"
+
+# Outils d'aide aux tests
+mockk = "1.14.0"
+coroutinesTest = "1.10.1"
+turbine = "1.2.0"
+
+
+
+
+[libraries]
+# --- Architecture & Noyau Android ---
+androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "androidxCore" }
+androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "androidxActivity" }
+androidx-core-splashscreen = { group = "androidx.core", name = "core-splashscreen", version.ref = "androidxCoreSplashscreen" }
+accompanist-permissions = { module = "com.google.accompanist:accompanist-permissions", version.ref = "accompanistPermissions" }
+kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinxCoroutines" }
+kotlin-bom = { group = "org.jetbrains.kotlin", name = "kotlin-bom", version.ref = "kotlin" }
+
+# --- Navigation ---
+compose-destinations-core = { group = "io.github.raamcosta.compose-destinations", name = "core", version.ref = "composeDestination" }
+compose-destinations-ksp = { group = "io.github.raamcosta.compose-destinations", name = "ksp", version.ref = "composeDestination" }
+
+# --- Jetpack Compose (Géré par la BOM) ---
+androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "androidxComposeBom" }
+androidx-compose-ui = { group = "androidx.compose.ui", name = "ui" }
+androidx-compose-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
+androidx-compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
+androidx-compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
+androidx-compose-material3 = { group = "androidx.compose.material3", name = "material3" }
+compose-icons-extended = { group = "androidx.compose.material", name = "material-icons-extended" }
+androidx-compose-ui-text-google-fonts = { group = "androidx.compose.ui", name = "ui-text-google-fonts", version.ref = "uiTextGoogleFonts" }
+
+# --- Gestion du cycle de vie & MVVM ---
+androidx-lifecycle-runtime-compose = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "androidxLifecycle" }
+androidx-lifecycle-viewmodel-compose = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "androidxLifecycle" }
+
+# --- Injection de dépendances (Hilt) ---
+hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
+hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hilt" }
+hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltNavCompose" }
+
+# --- Firebase (Géré par la BOM) ---
+firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebaseBom" }
+firebase-auth = { group = "com.google.firebase", name = "firebase-auth" }
+firebase-firestore = { group = "com.google.firebase", name = "firebase-firestore" }
+firebase-storage = { group = "com.google.firebase", name = "firebase-storage" }
+firebase-messaging = { group = "com.google.firebase", name = "firebase-messaging" }
+
+firebase-ui-auth = { group = "com.firebaseui", name = "firebase-ui-auth", version.ref = "firebaseUi" }
+firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics" }
+
+# --- DataStore ---
+datastore = { group = "androidx.datastore", name = "datastore-preferences", version.ref = "datastore" }
+
+# --- Chargement d'images ---
+coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
+
+# --- 🧪 Tests Unitaires (JUnit 5 / Jupiter) ---
+junit-jupiter-api = { group = "org.junit.jupiter", name = "junit-jupiter-api", version.ref = "junitJupiter" }
+junit-jupiter-engine = { group = "org.junit.jupiter", name = "junit-jupiter-engine", version.ref = "junitJupiter" }
+junit-jupiter-params = { group = "org.junit.jupiter", name = "junit-jupiter-params", version.ref = "junitJupiter" } # Optionnel pour tes tests paramétrés
+junit-platform-launcher = { module = "org.junit.platform:junit-platform-launcher" }
+
+# --- 🧪 Tests d'Intégration & UI (JUnit 4 + Compose UI) ---
+junit4 = { group = "junit", name = "junit", version.ref = "junit4" }
+androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "androidxJunit" }
+androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "androidxEspresso" }
+androidx-compose-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
+androidx-compose-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
+androidx-espresso_intent = {group = "androidx.test.espresso", name = "espresso-intents", version.ref = "androidxEspresso"}
+
+# --- Outils d'aide aux tests (Communs) ---
+mockk = { group = "io.mockk", name = "mockk", version.ref = "mockk" }
+mockk-android = {group = "io.mockk", name = "mockk-android", version.ref = "mockk"}
+kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "coroutinesTest" }
+turbine = { group = "app.cash.turbine", name = "turbine", version.ref = "turbine" }
+
+
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "agp" }
+kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" } # Gère le compilateur Compose depuis Kotlin 2.0
+google-services = { id = "com.google.gms.google-services", version.ref = "gmsPlugin" }
+hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
+ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
+secrets-gradle-plugin = { id = "com.google.android.libraries.mapsplatform.secrets-gradle-plugin", version.ref = "secretsGradlePlugin" }

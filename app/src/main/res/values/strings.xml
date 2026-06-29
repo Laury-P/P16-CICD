@@ -1,0 +1,102 @@
+<resources>
+    <array name="pas_de_certificats"></array>
+
+    <string name="app_name">Eventorias</string>
+
+    <!-- Error -->
+    <string name="error_text">An error has occurred, \nplease try again later.</string>
+    <string name="error_title">Error</string>
+    <string name="network_error">An error has occurred. Check your internet connection and retry.</string>
+    <string name="logged_out_error">You are not connected. Log in first before publishing an event.</string>
+    <string name="unknown_error">An error has occurred. Please try again later.</string>
+
+    <!-- Button -->
+    <string name="retry_button">Try again</string>
+    <string name="save_button">Save</string>
+    <string name="ok_button">OK</string>
+    <string name="cancel_button">Cancel</string>
+    <string name="event_nav_button">Events</string>
+    <string name="profile_nav_button">Profile</string>
+    <string name="add_event_button">Validate</string>
+    <string name="logout_button">Log out</string>
+
+    <!-- Auth -->
+    <string name="profile_completion_title">Profile creation for: %1$s</string>
+    <string name="firstname">Firstname</string>
+    <string name="lastname">Lastname</string>
+
+    <!-- Event -->
+    <string name="category_music">Music</string>
+    <string name="category_art">Art &amp; Exhibition</string>
+    <string name="category_tech">Tech &amp; Innovation</string>
+    <string name="category_food_drink">Food &amp; Drink</string>
+    <string name="category_literature">Literature</string>
+    <string name="category_cinema">Cinema &amp; Screenings</string>
+    <string name="category_charity">Charity</string>
+    <string name="category_sports">Sports</string>
+    <string name="category_business">Networking &amp; Business</string>
+    <string name="category_lifestyle">Lifestyle &amp; Hobbies</string>
+    <string name="category_diverse">Diverse</string>
+
+    <!-- Event List -->
+    <string name="event_list_screen_title">Event List</string>
+    <string name="search_button_description">Search an event</string>
+    <string name="sort_button_description">Sort events</string>
+    <string name="close_sort_description">Close sort panel</string>
+    <string name="add_fab_description">Add an event</string>
+    <string name="empty_list">No event scheduled yet.</string>
+    <string name="search_label">Search events…</string>
+    <string name="close_searchbar_description">Close the search bar.</string>
+    <string name="delete_search_description">Delete the current search.</string>
+    <string name="all_chip_label">All</string>
+    <string name="sort_date_text">Sort by date</string>
+    <string name="choose_date_label">Choose a date…</string>
+    <string name="sort_category_text">Sort by category</string>
+    <string name="remove_date_filter_description">Remove date filter</string>
+    <string name="remove_category_filter_description">Remove category filter</string>
+    <string name="on_event_click_label">See event details</string>
+
+    <!-- Event Detail -->
+    <string name="date_time_description">%1$s at %2$s</string>
+    <string name="back_button">Back to the list</string>
+    <string name="event_not_found"> This event could not be found. You will be redirected shortly.</string>
+    <string name="map_description">Map to the event</string>
+    <string name="switch_label">Will you attend? </string>
+    <plurals name="attendees_counter">
+        <item quantity="one">%1$d is going</item>
+        <item quantity="other">%1$d are going</item>
+    </plurals>
+    <string name="share_event_button_description">Share this event</string>
+    <string name="share_event_chooser_title">Share this event via</string>
+    <string name="share_message">You have been invited to %1$s : %2$s</string>
+
+    <!-- Add Event -->
+    <string name="add_screen_title">Creation of an event</string>
+    <string name="title_label">Title</string>
+    <string name="title_placeholder">New event</string>
+    <string name="description_label">Description</string>
+    <string name="description_placeholder">Tap here to enter your description</string>
+    <string name="date_label">Date</string>
+    <string name="date_description">Select event date</string>
+    <string name="time_label">Time</string>
+    <string name="time_description">Select event time</string>
+    <string name="address_label">Address</string>
+    <string name="address_placeholder">Enter full address</string>
+    <string name="take_photo_description">Take a photo</string>
+    <string name="select_from_gallery_description">Select from gallery</string>
+    <string name="category_label">Category</string>
+    <string name="photo_preview_description">Selected photo of the event</string>
+
+    <!-- Profile -->
+    <string name="profile_screen_title">User profile</string>
+    <string name="avatar_description">Current chosen avatar</string>
+    <string name="no_avatar">Choose an avatar</string>
+    <string name="name_label">Name</string>
+    <string name="email_label">Email</string>
+    <string name="notification_switch_label">Notifications</string>
+    <string name="profile_error">An error occurred.\n You will be redirected shortly to the event list.\n Try again later.</string>
+    <string name="logout_failed"> Log out unexpectedly failed. </string>
+    <string name="upload_avatar_failure"> Failed to change avatar. Retry later.</string>
+
+
+</resources>
