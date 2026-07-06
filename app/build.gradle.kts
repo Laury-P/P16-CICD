@@ -1,3 +1,5 @@
+import org.gradle.testing.jacoco.tasks.JacocoReport
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose)
@@ -5,6 +7,7 @@ plugins {
     alias(libs.plugins.hilt)
     alias(libs.plugins.google.services)
     alias(libs.plugins.secrets.gradle.plugin)
+    id("jacoco")
 }
 
 android {
@@ -24,6 +27,10 @@ android {
     }
 
     buildTypes {
+        debug {
+            enableUnitTestCoverage = true
+            enableAndroidTestCoverage = true
+        }
         release {
             // securisation et obfuscation du code
             isMinifyEnabled = true
@@ -57,8 +64,69 @@ android {
         }
     }
 }
+
 tasks.withType<Test>().configureEach {
     useJUnitPlatform()
+}
+
+jacoco {
+    toolVersion = "0.8.12"
+}
+
+tasks.register<JacocoReport>("jacocoTestReport") {
+    group = "Reporting"
+    description = "Generate Jacoco coverage reports for Debug build"
+
+    dependsOn("testDebugUnitTest", "connectedDebugAndroidTest")
+
+    reports {
+        xml.required.set(true)
+        html.required.set(true)
+    }
+
+    val fileFilter = listOf(
+        "**/R.class",
+        "**/R$*.class",
+        "**/BuildConfig.*",
+        "**/Manifest*.*",
+        "**/*Test*.*",
+        "android/**/*.*",
+        "**/*Hilt*.*",
+        "**/hilt_aggregated_deps/**",
+        "**/*_Factory.class",
+        "**/*_MembersInjector.class",
+        "**/*_ModuleNameHolder_*.class",
+        "**/*_HiltModules*.*",
+        "**/Dagger*.*",
+        "**/Hilt*.*",
+        "**/*_Provide*Factory*.*",
+        "**/BR.class",
+        "**/DataBinderMapperImpl*.*",
+        "**/DataBindingInfo.*",
+        "**/databinding/*Binding.*",
+        "**/ComposableSingletons$*.*",
+        "**/AnimatedVisibilityScope$*.*",
+        "**/AnimatedContent$*.*",
+        "**/Navigation*.*",
+        "**/*_GeneratedInjector.class",
+        "**/*_HiltModules_*.class"
+    )
+
+    val kotlinClasses = fileTree("${project.layout.buildDirectory.get()}/intermediates/built_in_kotlinc/debug/compileDebugKotlin/classes") {
+        exclude(fileFilter)
+    }
+    val javaClasses = fileTree("${project.layout.buildDirectory.get()}/intermediates/javac/debug/compileDebugJavaWithJavac/classes") {
+        exclude(fileFilter)
+    }
+
+    sourceDirectories.setFrom(files("${project.projectDir}/src/main/java", "${project.projectDir}/src/main/kotlin"))
+    classDirectories.setFrom(files(kotlinClasses, javaClasses))
+    executionData.setFrom(fileTree(project.layout.buildDirectory.get()) {
+        include(
+            "outputs/unit_test_code_coverage/debugUnitTest/testDebugUnitTest.exec",
+            "outputs/code_coverage/debugAndroidTest/connected/*/coverage.ec"
+        )
+    })
 }
 
 dependencies {
@@ -107,12 +175,12 @@ dependencies {
 
     // --- 🧪 TESTS UNITAIRES (Dossier test/ - JUnit 5 & MockK) ---
     testImplementation(libs.junit.jupiter.api)
-    testRuntimeOnly(libs.junit.jupiter.engine) // Optionnel mais recommandé pour exécuter JUnit 5
+    testImplementation(libs.junit.jupiter.engine)
     testImplementation(libs.junit.jupiter.params)
     testImplementation(libs.mockk)
     testImplementation(libs.kotlinx.coroutines.test)
     testImplementation(libs.turbine)
-    testRuntimeOnly(libs.junit.platform.launcher)
+    testImplementation(libs.junit.platform.launcher)
 
     // --- 🧪 TESTS D'INTÉGRATION & UI (Dossier androidTest/ - JUnit 4 & Compose UI) ---
     androidTestImplementation(platform(libs.androidx.compose.bom))
