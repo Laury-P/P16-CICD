@@ -22,6 +22,18 @@ jobs:
           distribution: 'zulu'
           java-version: '17'
 
+      - name: Create local.properties
+        env:
+          SECRET_KEY: ${{ secrets.MAPS_API_KEY }}
+        run: |
+          echo "sdk.dir=$ANDROID_HOME" > local.properties
+          echo "MAPS_API_KEY=$SECRET_KEY" >> local.properties
+
+      - name: Decode Google Services
+        env:
+          GOOGLE_SERVICES_SECRET: ${{ secrets.GOOGLE_SERVICES_BASE64 }}
+        run: echo "$GOOGLE_SERVICES_SECRET" | base64 --decode > app/google-services.json
+
       - name: Enable KVM
         run: |
           echo 'KERNEL=="kvm", GROUP="kvm", MODE="0666", OPTIONS+="static_node=kvm"' | sudo tee /etc/udev/rules.d/99-kvm4all.rules
