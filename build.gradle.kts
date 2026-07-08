@@ -15,4 +15,21 @@ plugins {
 
     // Pour recupérer la clé API dans le fichier local.properties
     alias(libs.plugins.secrets.gradle.plugin) apply false
+
+    id("org.sonarqube") version "7.3.1.8318"
+}
+
+sonar {
+    properties {
+        property("sonar.organization", "laury-p")
+        property("sonar.projectKey", "Laury-P_P16-CICD")
+        property("sonar.projectName", "Eventorias_CICD")
+        property("sonar.host.url", "https://sonarcloud.io")
+
+        property("sonar.coverage.jacoco.xmlReportPaths", "${project.rootDir}/app/build/reports/jacoco/jacocoTestReport/jacocoTestReport.xml")
+
+        val sonarToken = System.getenv("SONAR_TOKEN") ?: ""
+        property("sonar.token", sonarToken)
+
+    }
 }
