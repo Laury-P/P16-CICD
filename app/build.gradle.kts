@@ -11,13 +11,13 @@ plugins {
 }
 
 android {
-    val keystoreFile = file("${rootDir.path}/P16_eventorias")
-    val storePass = System.getenv("ANDROID_STORE_PASS")
-    val keyAlias = System.getenv("ANDROID_RELEASE_KEY_ALIAS")
-    val keyPass = System.getenv("ANDROID_RELEASE_KEY_PASS")
+    val keystoreFile = file(System.getenv("ANDROID_KEYSTORE_PATH") ?: "../P16_eventorias")
+    val storePass = System.getenv("ANDROID_STORE_PASS") ?: ""
+    val keyAlias = System.getenv("ANDROID_RELEASE_KEY_ALIAS") ?: ""
+    val keyPass = System.getenv("ANDROID_RELEASE_KEY_PASS") ?: ""
 
     signingConfigs {
-        if (keystoreFile.exists() && !storePass.isNullOrEmpty() && !keyAlias.isNullOrEmpty() && !keyPass.isNullOrEmpty()) {
+        if (keystoreFile.exists() && storePass.isNotEmpty() && keyAlias.isNotEmpty() && keyPass.isNotEmpty()) {
             create("release") {
                 storeFile = keystoreFile
                 storePassword = storePass
