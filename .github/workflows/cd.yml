@@ -34,8 +34,15 @@ jobs:
           GOOGLE_SERVICES_SECRET: ${{ secrets.GOOGLE_SERVICES_BASE64 }}
         run: echo "$GOOGLE_SERVICES_SECRET" | base64 --decode > app/google-services.json
 
+      - name: Décoder le Keystore Android
+        run: echo "${{ secrets.ANDROID_KEYSTORE_BASE64 }}" | base64 --decode > app/P16_eventorias
+
       - name: Build Release APK
         run: ./gradlew assembleRelease
+        env:
+          ANDROID_STORE_PASS: ${{ secrets.ANDROID_STORE_PASS }}
+          ANDROID_RELEASE_KEY_ALIAS: ${{ secrets.ANDROID_RELEASE_KEY_ALIAS }}
+          ANDROID_RELEASE_KEY_PASS: ${{ secrets.ANDROID_RELEASE_KEY_PASS }}
 
       - name: Upload artifact to Firebase App Distribution
         uses: wzieba/Firebase-Distribution-Github-Action@v1.7.0

@@ -11,6 +11,21 @@ plugins {
 }
 
 android {
+    val keystoreFile = file("${rootDir.path}/P16_eventorias")
+    val storePass = System.getenv("ANDROID_STORE_PASS")
+    val keyAlias = System.getenv("ANDROID_RELEASE_KEY_ALIAS")
+    val keyPass = System.getenv("ANDROID_RELEASE_KEY_PASS")
+
+    signingConfigs {
+        if (keystoreFile.exists() && !storePass.isNullOrEmpty() && !keyAlias.isNullOrEmpty() && !keyPass.isNullOrEmpty()) {
+            create("release") {
+                storeFile = keystoreFile
+                storePassword = storePass
+                this.keyAlias = keyAlias
+                keyPassword = keyPass
+            }
+        }
+    }
     namespace = "com.openclassroom.eventorias"
     //noinspection GradleDependency
     compileSdk = 36
@@ -39,6 +54,9 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            if (signingConfigs.findByName("release") != null) {
+                signingConfig = signingConfigs.getByName("release")
+            }
         }
     }
 
@@ -49,7 +67,8 @@ android {
 
     buildFeatures {
         compose = true
-        buildConfig = true // Permet de générer les classes qui permettent d'acceder à l'API Key dans local.properties
+        buildConfig =
+            true // Permet de générer les classes qui permettent d'acceder à l'API Key dans local.properties
     }
 
     packaging {
@@ -112,14 +131,21 @@ tasks.register<JacocoReport>("jacocoTestReport") {
         "**/*_HiltModules_*.class"
     )
 
-    val kotlinClasses = fileTree("${project.layout.buildDirectory.get()}/intermediates/built_in_kotlinc/debug/compileDebugKotlin/classes") {
-        exclude(fileFilter)
-    }
-    val javaClasses = fileTree("${project.layout.buildDirectory.get()}/intermediates/javac/debug/compileDebugJavaWithJavac/classes") {
-        exclude(fileFilter)
-    }
+    val kotlinClasses =
+        fileTree("${project.layout.buildDirectory.get()}/intermediates/built_in_kotlinc/debug/compileDebugKotlin/classes") {
+            exclude(fileFilter)
+        }
+    val javaClasses =
+        fileTree("${project.layout.buildDirectory.get()}/intermediates/javac/debug/compileDebugJavaWithJavac/classes") {
+            exclude(fileFilter)
+        }
 
-    sourceDirectories.setFrom(files("${project.projectDir}/src/main/java", "${project.projectDir}/src/main/kotlin"))
+    sourceDirectories.setFrom(
+        files(
+            "${project.projectDir}/src/main/java",
+            "${project.projectDir}/src/main/kotlin"
+        )
+    )
     classDirectories.setFrom(files(kotlinClasses, javaClasses))
     executionData.setFrom(fileTree(project.layout.buildDirectory.get()) {
         include(
