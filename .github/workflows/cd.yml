@@ -27,7 +27,7 @@ jobs:
           SECRET_KEY: ${{ secrets.MAPS_API_KEY }}
         run: |
           echo "sdk.dir=$ANDROID_HOME" > local.properties
-          echo "NOM_DE_TA_CLE_D_API=$SECRET_KEY" >> local.properties
+          echo "MAPS_API_KEY=$SECRET_KEY" >> local.properties
 
       - name: Decode Google Services JSON
         env:
