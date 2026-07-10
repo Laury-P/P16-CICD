@@ -348,7 +348,7 @@ fun SuccessContentPreview() {
                     email = "adrien.chardon@email.com",
                     firstname = "Adrien",
                     lastname = "Chardon",
-                    avatar = "https://firebasestorage.googleapis.com/v0/b/eventorias-15e42.firebasestorage.app/o/52d7360517a4a8f4c1bf360e6a103532ef0b53b8.png?alt=media&token=ba39425d-7035-4184-930c-4082849e4942",
+                    avatar = "fake_url",
                 ),
                 onSwitchClicked = { },
                 onLogoutClick = {},
