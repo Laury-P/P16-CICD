@@ -42,7 +42,7 @@ jobs:
         run: chmod +x gradlew
 
       - name: Run Emulator & Execute All Tests with Jacoco
-        uses: reactivecircus/android-emulator-runner@v2
+        uses: reactivecircus/android-emulator-runner@6b0df40cd23605e62e0024acd7f72211a7e2887d
         with:
           api-level: 29
           script: ./gradlew jacocoTestReport
