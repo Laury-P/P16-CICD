@@ -26,7 +26,7 @@ sonar {
         property("sonar.projectName", "Eventorias_CICD")
         property("sonar.host.url", "https://sonarcloud.io")
 
-        property("sonar.coverage.jacoco.xmlReportPaths", "${project.rootDir}/app/build/reports/jacoco/jacocoTestReport/jacocoTestReport.xml")
+        property("sonar.coverage.jacoco.xmlReportPaths", "${layout.buildDirectory.get()}/reports/jacoco/jacocoTestReport/jacocoTestReport.xml")
 
         val sonarToken = System.getenv("SONAR_TOKEN") ?: ""
         property("sonar.token", sonarToken)
