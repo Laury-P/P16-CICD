@@ -33,3 +33,8 @@ sonar {
 
     }
 }
+allprojects {
+    dependencyLocking {
+        lockAllConfigurations()
+    }
+}
