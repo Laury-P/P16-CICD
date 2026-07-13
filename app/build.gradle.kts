@@ -101,6 +101,7 @@ tasks.register<JacocoReport>("jacocoTestReport") {
     reports {
         xml.required.set(true)
         html.required.set(true)
+        xml.outputLocation.set(file("${project.layout.buildDirectory.get()}/reports/jacoco/jacocoTestReport/jacocoTestReport.xml"))
     }
 
     val fileFilter = listOf(
@@ -131,14 +132,13 @@ tasks.register<JacocoReport>("jacocoTestReport") {
         "**/*_HiltModules_*.class"
     )
 
-    val kotlinClasses =
-        fileTree("${project.layout.buildDirectory.get()}/intermediates/built_in_kotlinc/debug/compileDebugKotlin/classes") {
-            exclude(fileFilter)
-        }
-    val javaClasses =
-        fileTree("${project.layout.buildDirectory.get()}/intermediates/javac/debug/compileDebugJavaWithJavac/classes") {
-            exclude(fileFilter)
-        }
+    val kotlinClasses = fileTree("${project.layout.buildDirectory.get()}/tmp/kotlin-classes/debug") {
+        exclude(fileFilter)
+    }
+
+    val javaClasses = fileTree("${project.layout.buildDirectory.get()}/intermediates/javac/debug/compileDebugJavaWithJavac/classes") {
+        exclude(fileFilter)
+    }
 
     sourceDirectories.setFrom(
         files(
@@ -146,11 +146,13 @@ tasks.register<JacocoReport>("jacocoTestReport") {
             "${project.projectDir}/src/main/kotlin"
         )
     )
+
     classDirectories.setFrom(files(kotlinClasses, javaClasses))
+
     executionData.setFrom(fileTree(project.layout.buildDirectory.get()) {
         include(
             "outputs/unit_test_code_coverage/debugUnitTest/testDebugUnitTest.exec",
-            "outputs/code_coverage/debugAndroidTest/connected/*/coverage.ec"
+            "outputs/code_coverage/debugAndroidTest/connected/**/coverage.ec" // Utilisation de ** au cas où le nom du dossier de l'émulateur change sur GitHub
         )
     })
 }
