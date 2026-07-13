@@ -26,16 +26,29 @@ sonar {
         property("sonar.projectName", "Eventorias_CICD")
         property("sonar.host.url", "https://sonarcloud.io")
 
-        property("sonar.sources", "${project.projectDir}/app/src/main/java")
-        property("sonar.tests", "${project.projectDir}/app/src/test/java,${project.projectDir}/app/src/androidTest/java")
-
-        property("sonar.coverage.jacoco.xmlReportPaths", "${project.projectDir}/app/build/reports/jacoco/jacocoTestReport/jacocoTestReport.xml")
-
         val sonarToken = System.getenv("SONAR_TOKEN") ?: ""
         property("sonar.token", sonarToken)
 
+        property("sonar.skip", "true")
     }
 }
+
+subprojects {
+    if (name == "app") {
+        sonar {
+            properties {
+                property("sonar.skip", "false")
+                property("sonar.tests", "src/test/java,src/androidTest/java")
+
+                val jacocoReportPath = "${layout.buildDirectory.get().asFile.absolutePath}/reports/jacoco/jacocoTestReport/jacocoTestReport.xml"
+                property("sonar.coverage.jacoco.xmlReportPaths", jacocoReportPath)
+
+                property("sonar.exclusions", "**/mipmap*/*.webp, **/mipmap*/*.png, **/res/**/*")
+            }
+        }
+    }
+}
+
 allprojects {
     dependencyLocking {
         lockAllConfigurations()
