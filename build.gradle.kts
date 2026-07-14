@@ -19,6 +19,18 @@ plugins {
     id("org.sonarqube") version "7.3.1.8318"
 }
 
+sonar {
+    properties {
+        property("sonar.organization", "laury-p")
+        property("sonar.projectKey", "Laury-P_P16-CICD")
+        property("sonar.projectName", "Eventorias_CICD")
+        property("sonar.host.url", "https://sonarcloud.io")
+
+        val sonarToken = System.getenv("SONAR_TOKEN") ?: ""
+        property("sonar.token", sonarToken)
+    }
+}
+
 allprojects {
     dependencyLocking {
         lockAllConfigurations()

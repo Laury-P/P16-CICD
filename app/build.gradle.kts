@@ -229,13 +229,6 @@ secrets {
 
 sonar {
     properties {
-        property("sonar.organization", "laury-p")
-        property("sonar.projectKey", "Laury-P_P16-CICD")
-        property("sonar.projectName", "Eventorias_CICD")
-        property("sonar.host.url", "https://sonarcloud.io")
-
-        val sonarToken = System.getenv("SONAR_TOKEN") ?: ""
-        property("sonar.token", sonarToken)
 
         val jacocoReportPath = "${layout.buildDirectory.get().asFile.absolutePath}/reports/jacoco/jacocoTestReport/jacocoTestReport.xml"
         property("sonar.coverage.jacoco.xmlReportPaths", jacocoReportPath)
