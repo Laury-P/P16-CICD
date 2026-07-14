@@ -28,8 +28,6 @@ sonar {
 
         val sonarToken = System.getenv("SONAR_TOKEN") ?: ""
         property("sonar.token", sonarToken)
-
-        property("sonar.skip", "true")
     }
 }
 
@@ -37,7 +35,6 @@ subprojects {
     if (name == "app") {
         sonar {
             properties {
-                property("sonar.skip", "false")
                 property("sonar.tests", "src/test/java,src/androidTest/java")
 
                 val jacocoReportPath = "${layout.buildDirectory.get().asFile.absolutePath}/reports/jacoco/jacocoTestReport/jacocoTestReport.xml"
