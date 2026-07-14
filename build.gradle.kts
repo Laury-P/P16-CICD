@@ -26,13 +26,11 @@ sonar {
         property("sonar.projectName", "Eventorias_CICD")
         property("sonar.host.url", "https://sonarcloud.io")
 
-        property("sonar.coverage.jacoco.xmlReportPaths", "${project.projectDir}/app/build/reports/jacoco/jacocoTestReport/jacocoTestReport.xml")
-
         val sonarToken = System.getenv("SONAR_TOKEN") ?: ""
         property("sonar.token", sonarToken)
-
     }
 }
+
 allprojects {
     dependencyLocking {
         lockAllConfigurations()
