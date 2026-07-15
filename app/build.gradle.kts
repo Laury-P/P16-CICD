@@ -101,7 +101,6 @@ tasks.register<JacocoReport>("jacocoTestReport") {
     reports {
         xml.required.set(true)
         html.required.set(true)
-        xml.outputLocation.set(file("${project.layout.buildDirectory.get()}/reports/jacoco/jacocoTestReport/jacocoTestReport.xml"))
     }
 
     val fileFilter = listOf(
@@ -129,30 +128,27 @@ tasks.register<JacocoReport>("jacocoTestReport") {
         "**/AnimatedContent$*.*",
         "**/Navigation*.*",
         "**/*_GeneratedInjector.class",
-        "**/*_HiltModules_*.class"
+        "**/*_HiltModules_*.class",
+        "**/EventoriasApplication*.*", // On exclut l'init Hilt qui mismatch
+        "**/*_EventoriasApplication*.*",
+        "**/di/**",
+        "**/*Destination*.*", // Exclut les destinations de navigation générées si tu utilises une lib (ex: Compose Destinations)
+        "**/*NavGraph*.*"
     )
 
-    val kotlinClasses = fileTree("${project.layout.buildDirectory.get()}/tmp/kotlin-classes/debug") {
+    val kotlinClasses = fileTree("${project.layout.buildDirectory.get()}/intermediates/built_in_kotlinc/debug/compileDebugKotlin/classes") {
         exclude(fileFilter)
     }
-
     val javaClasses = fileTree("${project.layout.buildDirectory.get()}/intermediates/javac/debug/compileDebugJavaWithJavac/classes") {
         exclude(fileFilter)
     }
 
-    sourceDirectories.setFrom(
-        files(
-            "${project.projectDir}/src/main/java",
-            "${project.projectDir}/src/main/kotlin"
-        )
-    )
-
+    sourceDirectories.setFrom(files("${project.projectDir}/src/main/java", "${project.projectDir}/src/main/kotlin"))
     classDirectories.setFrom(files(kotlinClasses, javaClasses))
-
     executionData.setFrom(fileTree(project.layout.buildDirectory.get()) {
         include(
             "outputs/unit_test_code_coverage/debugUnitTest/testDebugUnitTest.exec",
-            "outputs/code_coverage/debugAndroidTest/connected/**/coverage.ec" // Utilisation de ** au cas où le nom du dossier de l'émulateur change sur GitHub
+            "outputs/code_coverage/debugAndroidTest/connected/*/coverage.ec"
         )
     })
 }
@@ -232,7 +228,7 @@ sonar {
 
         val jacocoReportPath = "${layout.buildDirectory.get().asFile.absolutePath}/reports/jacoco/jacocoTestReport/jacocoTestReport.xml"
         property("sonar.coverage.jacoco.xmlReportPaths", jacocoReportPath)
-
+        property("sonar.coverage.exclusions", "**/EventoriasApplication.kt, **/di/**, **/*Test*.*")
         property("sonar.exclusions", "**/mipmap*/*.webp, **/mipmap*/*.png, **/res/**/*")
     }
 }
